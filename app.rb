@@ -14,7 +14,7 @@ class App
     loop do
       app_options
 
-      unless (1..7).include?(@option.to_i)
+      unless (1..13).include?(@option.to_i)
         puts "Your input is invalid. Please enter then correct option value........\n"
       end
 
