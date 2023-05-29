@@ -4,8 +4,8 @@ require 'date'
 class Book < Item
   attr_accessor :publisher, :cover_state
 
-  def initialize(genre, author, source, label, publish_date, publisher, cover_state)
-    super(genre, author, source, label, publish_date)
+  def initialize(genre, author, label, publish_date, publisher, cover_state = 'good')
+    super(genre, author, label, publish_date)
     @publisher = publisher
     @cover_state = cover_state
   end
@@ -14,6 +14,3 @@ class Book < Item
     super || @cover_state == 'bad'
   end
 end
-
-book = Book.new('genre', 'alaska', 'medium', 'new book', Date.parse('1990-12-12'), 'hunn', 'good')
-puts book.can_be_archived?
