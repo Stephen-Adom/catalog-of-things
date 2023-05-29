@@ -151,7 +151,16 @@ module DisplayItem
     if @all_books.empty?
       puts "No Books available!!!\n\n"
     else
-      @all_books.each { |book| puts book }
+      @all_books.each { |book| puts "#{book.label[:title]}" }
+      puts "\n\n"
+    end
+  end
+
+  def list_all_labels
+    if @all_labels.empty?
+      puts "No labels available!!!\n\n"
+    else
+      @all_labels.each { |label| puts "Label: #{label[:title]} Color: #{label[:color]}" }
       puts "\n\n"
     end
   end

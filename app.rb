@@ -59,6 +59,8 @@ class App
     case option.to_i
     when 1
       list_all_books
+    when 5
+      list_all_labels
     when 7
       book_info
     end
