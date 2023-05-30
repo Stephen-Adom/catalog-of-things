@@ -1,9 +1,11 @@
 require_relative './classes/music_album_app'
 class App
   attr_accessor :option
+
   MusicAlbumApp.new
 
   def app_options
+    puts "\n\n"
     puts 'Please choose an option by entering a number:'
     puts '1 - List all books'
     puts '2 - List all music albums'
@@ -30,7 +32,7 @@ class App
       MusicAlbumApp.add_album
     else
       puts 'Option not available'
-    end 
+    end
   end
 
   def run

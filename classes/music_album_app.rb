@@ -32,18 +32,18 @@ class MusicAlbumApp
     end
 
     def list_albums
-      puts "Listing music albums ...\n"
+      puts "\nListing music albums ...\n"
       load_albums
       return puts 'There are no music albums' unless music_albums.length.positive?
 
       @music_albums.each_with_index do |album, index|
-        puts album.inspect
-        puts "#{index}) Publish Date: #{album.publish_date}, On Spotify: #{album.on_spotify}, Genre: #{album.genre.name}"
+        print "#{index}) Publish Date: #{album.publish_date}, "
+        print "On Spotify: #{album.on_spotify}, Genre: #{album.genre.name}"
       end
     end
 
     def load_albums
-      puts "Loading albums ... \n"
+      puts "Loading albums ... \n\n"
       return @music_albums unless @music_albums.empty?
 
       album_data = Storage.read_file_content(@file_name)
@@ -57,7 +57,8 @@ class MusicAlbumApp
     def save_albums
       albums = []
       @music_albums.each do |item|
-        albums.push({ id: item.id, publish_date: item.publish_date, on_spotify: item.on_spotify, archived: item.archived,
+        albums.push({ id: item.id, publish_date: item.publish_date,
+                      on_spotify: item.on_spotify, archived: item.archived,
                       genre: { name: item.genre.name } })
       end
       Storage.save_file_content(@file_name, albums)
