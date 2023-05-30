@@ -1,3 +1,6 @@
+require_relative './classes/logic/game_logic'
+require_relative './classes/logic/author_logic'
+
 class App
   attr_accessor :option
 
@@ -16,26 +19,38 @@ class App
     puts '11 - Add a movie'
     puts '12 - Add a game'
     puts '13 - Exit'
-    print 'Your option '
-    @option = gets.chomp
+    print 'Your option: '
+    @option = gets.chomp.to_i
   end
 
-  def check_option(option); end
+  def check_option(option)
+    case option
+    when 4
+      GameLogic.list_games
+    when 7
+      AuthorLogic.list_authors
+    when 12
+      GameLogic.add_game
+    else
+      puts 'Invalid option'
+    end
+  end
 
   def run
     loop do
       app_options
 
       unless (1..13).include?(@option.to_i)
-        puts "Your input is invalid. Please enter then correct option value........\n"
+        puts "Your input is invalid. Please enter a correct option value.\n"
+        next
       end
 
       if @option.to_i == 13
-        puts 'Thank you for using the app....'
+        puts 'Thank you for using the app.'
         break
       end
 
-      check_option(@option)
+      check_option(@option.to_i)
     end
   end
 end
