@@ -19,15 +19,4 @@ class Game < Item
   def last_played_more_than_two_years_ago?
     (Date.today - @last_played_at) > 365 * 2
   end
-
-  def to_s
-    "Game ID: #{@id}\n" \
-    "Genre: #{@genre}\n" \
-    "Author: #{@author}\n" \
-    "Source: #{@source}\n" \
-    "Label: #{@label}\n" \
-    "Publish Date: #{@publish_date}\n" \
-    "Multiplayer: #{@multiplayer}\n" \
-    "Last Played At: #{@last_played_at}"
-  end
 end
