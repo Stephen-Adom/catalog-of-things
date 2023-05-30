@@ -46,7 +46,6 @@ class App
 
   def run
     load_data
-    puts @all_books.length
     loop do
       app_options
 
@@ -55,7 +54,6 @@ class App
       end
 
       if @option.to_i == 10
-        # save_books
         puts 'Thank you for using the app....'
         break
       end

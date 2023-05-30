@@ -2,7 +2,6 @@ require_relative '../classes/book'
 require_relative '../classes/label'
 require_relative '../classes/genre'
 require_relative '../classes/author'
-require 'pry'
 module BookModule
   def book_info
     # enter book label
@@ -42,15 +41,15 @@ module BookModule
     author_obj = create_book_author(book_object[:author])
     genre_obj = create_book_genre(book_object[:genre])
     new_book = Book.new(genre_obj, author_obj, label_obj, Date.parse(book_object[:published_date]),
-                        book_object[:publisher], book_object[:cover_state])
+                        book_object[:publisher])
 
-    binding.pry
+    new_book.update_cover_state(book_object[:cover_state])
+
     save_book(new_book)
   end
 
   def save_book(book)
     @all_books << book
-    binding.pry
     book.save_books_to_json(@all_books)
   end
 
@@ -104,17 +103,29 @@ module DisplayItem
     if @all_books.empty?
       puts "No Books available!!!\n\n"
     else
-      @all_books.each { |book| puts(book.label[:title]) }
-      puts "\n\n"
+      @all_books.each do |book|
+        puts combine_book_info(book)
+      end
+      puts "\n"
     end
+  end
+
+  def combine_book_info(book)
+    print "Id: #{book.id} "
+    print "Genre: #{book.genre.name} "
+    print "Author: #{create_author_full_name(book.author.first_name, book.author.last_name)} "
+    print "Label: #{book.label.title} "
+    print "Publish-date: #{book.publish_date} "
+    print "Publisher: #{book.publisher} "
+    print "cover state: #{book.cover_state}"
   end
 
   def list_all_labels
     if @all_labels.empty?
       puts "No labels available!!!\n\n"
     else
-      @all_labels.each { |label| puts "Label: #{label[:title]} Color: #{label[:color]}" }
-      puts "\n\n"
+      @all_labels.each { |label| puts "Id: #{label.id} Label: #{label.title} Color: #{label.color}" }
+      puts "\n"
     end
   end
 end

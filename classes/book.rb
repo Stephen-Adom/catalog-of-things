@@ -5,10 +5,10 @@ require 'pry'
 class Book < Item
   attr_accessor :publisher, :cover_state
 
-  def initialize(genre, author, label, publish_date, publisher, cover_state = 'good')
+  def initialize(genre, author, label, publish_date, publisher)
     super(genre, author, label, publish_date)
     @publisher = publisher
-    @cover_state = cover_state
+    @cover_state = 'good'
   end
 
   def can_be_archived?
@@ -17,6 +17,10 @@ class Book < Item
 
   def update_id(id)
     @id = id
+  end
+
+  def update_cover_state(state)
+    @cover_state = state
   end
 
   def save_books_to_json(all_books)

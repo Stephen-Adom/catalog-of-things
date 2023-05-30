@@ -13,6 +13,10 @@ class Genre
     item.genre = self
   end
 
+  def update_id(id)
+    @id = id
+  end
+
   def save_genre_to_json(all_genres)
     File.write('data/genres.json', JSON.dump({
                                                data: all_genres.map do |genre|

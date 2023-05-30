@@ -14,6 +14,10 @@ class Author
     item.author = self
   end
 
+  def update_id(id)
+    @id = id
+  end
+
   def save_author_to_json(all_authors)
     File.write('data/authors.json', JSON.dump({
                                                 data: all_authors.map do |author|
