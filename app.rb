@@ -13,12 +13,11 @@ class App
     puts '5 - List all genres (e.g Comedy, Thriller)'
     puts '6 - List all labels (e.g Gift, New)'
     puts '7 - List all authors (e.g Stephen King)'
-    puts '8 - List all sources (e.g From a friend, Online shop)'
-    puts '9 - Add a book'
-    puts '10 - Add a music album'
-    puts '11 - Add a movie'
-    puts '12 - Add a game'
-    puts '13 - Exit'
+    puts '8 - Add a book'
+    puts '9 - Add a music album'
+    puts '10 - Add a movie'
+    puts '11 - Add a game'
+    puts '12 - Exit'
     print 'Your option: '
     @option = gets.chomp.to_i
   end
@@ -29,7 +28,7 @@ class App
       GameLogic.list_games
     when 7
       AuthorLogic.list_authors
-    when 12
+    when 11
       GameLogic.add_game
     else
       puts 'Invalid option'
@@ -40,12 +39,12 @@ class App
     loop do
       app_options
 
-      unless (1..13).include?(@option.to_i)
+      unless (1..12).include?(@option.to_i)
         puts "Your input is invalid. Please enter a correct option value.\n"
         next
       end
 
-      if @option.to_i == 13
+      if @option.to_i == 12
         puts 'Thank you for using the app.'
         break
       end
