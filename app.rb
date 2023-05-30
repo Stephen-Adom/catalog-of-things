@@ -1,5 +1,7 @@
+require_relative './classes/music_album_app'
 class App
   attr_accessor :option
+  MusicAlbumApp.new
 
   def app_options
     puts 'Please choose an option by entering a number:'
@@ -20,7 +22,16 @@ class App
     @option = gets.chomp
   end
 
-  def check_option(option); end
+  def check_option(option)
+    case option
+    when '2'
+      MusicAlbumApp.list_albums
+    when '10'
+      MusicAlbumApp.add_album
+    else
+      puts 'Option not available'
+    end 
+  end
 
   def run
     loop do
