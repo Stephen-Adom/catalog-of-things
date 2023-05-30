@@ -14,8 +14,7 @@ class GameLogic
     puts 'Enter game details:'
     print 'Genre: '
     genre = gets.chomp
-    print 'Author: '
-    author = gets.chomp
+    author = find_or_create_author
     print 'Source: '
     source = gets.chomp
     print 'Label: '
@@ -29,6 +28,27 @@ class GameLogic
 
     game = Game.new(genre, author, source, label, publish_date, multiplayer, Date.parse(last_played_at))
     save_game(game)
+  end
+
+  def self.find_or_create_author
+    print 'Author First Name: '
+    first_name = gets.chomp
+    print 'Author Last Name: '
+    last_name = gets.chomp
+
+    authors = AuthorLogic.load_authors
+    author = authors.find { |a| a['first_name'] == first_name && a['last_name'] == last_name }
+
+    if author.nil?
+      author = Author.new(first_name, last_name)
+      authors << AuthorLogic.serialize_author(author)
+      AuthorLogic.save_authors(authors)
+      puts 'Author created and saved successfully.'
+    else
+      puts 'Author found.'
+    end
+
+    author
   end
 
   def self.save_game(game)
@@ -45,7 +65,7 @@ class GameLogic
       id: game.id,
       archived: game.archived,
       genre: game.genre,
-      author: game.author,
+      author: "#{game.author.first_name} #{game.author.last_name}",
       source: game.source,
       label: game.label,
       publish_date: game.publish_date.to_s,
