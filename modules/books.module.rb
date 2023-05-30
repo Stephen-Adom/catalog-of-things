@@ -1,123 +1,20 @@
 require_relative '../classes/book'
-
-module ListBookComponents
-  def list_available_labels
-    return if @all_labels.empty?
-
-    @all_labels.each_with_index do |label, index|
-      puts "#{index}) - #{label[:title]} #{label[:color]}"
-    end
-  end
-
-  def list_available_authors
-    return if @all_authors.empty?
-
-    @all_authors.each_with_index do |author, index|
-      puts "#{index}) - #{author[:first_name]} #{author[:last_name]}"
-    end
-  end
-
-  def list_available_genres
-    return if @all_genres.empty?
-
-    @all_genres.each_with_index do |genre, index|
-      puts "#{index}) - #{genre[:name]}"
-    end
-  end
-end
-
-module ValidateUserInput
-  def label_info_input
-    selected_label = nil
-
-    loop do
-      puts 'Select a book by number: '
-      list_available_labels
-      input_label = gets.chomp.to_i
-
-      selected_label = @all_labels[input_label]
-
-      break if selected_label
-
-      puts "Selected book not available!!\n\n"
-    end
-    selected_label
-  end
-
-  def author_info_input
-    selected_author = nil
-    loop do
-      puts 'Select an author by number: '
-      list_available_authors
-      input_author = gets.chomp.to_i
-
-      selected_author = @all_authors[input_author]
-
-      break if selected_author
-
-      puts "Selected author not available!!\n\n"
-    end
-    selected_author
-  end
-
-  def genre_info_input
-    selected_genre = nil
-
-    loop do
-      puts 'Select genre by number: '
-      list_available_genres
-      input_genre = gets.chomp.to_i
-
-      selected_genre = @all_genres[input_genre]
-
-      break if selected_genre
-
-      puts "Selected genre not available!!\n\n"
-    end
-
-    selected_genre
-  end
-
-  def cover_info_input
-    # enter book cover state
-    cover_state = nil
-    loop do
-      print 'Enter cover state (1) good (2) bad ? [Input the number]: '
-      cover_state = gets.chomp.to_i
-
-      break if (1..2).include?(cover_state)
-
-      puts "Invalid input. Please select either 1) or 2)!!!\n\n"
-    end
-
-    cover_state == 1 ? 'good' : 'bad'
-  end
-end
-
+require_relative '../classes/label'
+require_relative '../classes/genre'
+require_relative '../classes/author'
+require 'pry'
 module BookModule
-  include ListBookComponents
-  include ValidateUserInput
-
-  def display_book_component
-    # select book label
-    selected_label = label_info_input
-
-    # select book author
-    selected_author = author_info_input
-
-    # select book genre
-    selected_genre = genre_info_input
-
-    {
-      label: selected_label,
-      author: selected_author,
-      genre: selected_genre
-    }
-  end
-
   def book_info
-    # get book components
-    book_components = display_book_component
+    # enter book label
+    print 'Enter book label (e.g Gift, New): '
+    input_label = gets.chomp
+
+    # enter book author
+    print 'Enter book author (e.g Stephen King) : '
+    input_author = gets.chomp
+
+    print 'Enter book genre(e.g Comedy, Thriller): '
+    input_genre = gets.chomp
 
     # enter book publisher
     print 'Enter publisher: '
@@ -127,12 +24,13 @@ module BookModule
     print 'Enter published date (YYYY-MM-DD): '
     published_date = gets.chomp
 
-    cover_state = cover_info_input
+    print 'Enter cover state (good/bad): '
+    cover_state = gets.chomp
 
     create_book_object({
-                         label: book_components[:label],
-                         author: book_components[:author],
-                         genre: book_components[:genre],
+                         label: input_label,
+                         author: input_author,
+                         genre: input_genre,
                          publisher: publisher,
                          published_date: published_date,
                          cover_state: cover_state
@@ -140,9 +38,64 @@ module BookModule
   end
 
   def create_book_object(book_object)
-    new_book = Book.new(book_object[:genre], book_object[:author], book_object[:label],
-                        book_object[:published_date], book_object[:publisher], book_object[:cover_state])
-    add_a_book(new_book)
+    label_obj = create_book_label(book_object[:label])
+    author_obj = create_book_author(book_object[:author])
+    genre_obj = create_book_genre(book_object[:genre])
+    new_book = Book.new(genre_obj, author_obj, label_obj, Date.parse(book_object[:published_date]),
+                        book_object[:publisher], book_object[:cover_state])
+
+    binding.pry
+    save_book(new_book)
+  end
+
+  def save_book(book)
+    @all_books << book
+    binding.pry
+    book.save_books_to_json(@all_books)
+  end
+
+  def create_book_label(title)
+    if @all_labels.empty?
+      create_label_obj(title)
+    else
+      label_exist = @all_labels.find { |label| label.title == title }
+      label_exist.nil? ? create_label_obj(title) : label_exist
+    end
+  end
+
+  def create_label_obj(title)
+    new_label = Label.new(title)
+    @all_labels << new_label
+    new_label.save_label_to_json(@all_labels)
+    new_label
+  end
+
+  def create_book_author(name)
+    if @all_authors.empty?
+      create_author_obj(name)
+    else
+      author_exist = @all_authors.find { |author| create_author_full_name(author.first_name, author.last_name) == name }
+      author_exist.nil? ? create_author_obj(title) : author_exist
+    end
+  end
+
+  def create_author_obj(name)
+    names = name.split
+    new_author = Author.new(names[0].strip, names[1]&.strip)
+    @all_authors << new_author
+    new_author.save_author_to_json(@all_authors)
+    new_author
+  end
+
+  def create_author_full_name(firstname, lastname)
+    "#{firstname} #{lastname}"
+  end
+
+  def create_book_genre(name)
+    new_genre = Genre.new(name)
+    @all_genres << new_genre
+    new_genre.save_genre_to_json(@all_genres)
+    new_genre
   end
 end
 
@@ -151,7 +104,7 @@ module DisplayItem
     if @all_books.empty?
       puts "No Books available!!!\n\n"
     else
-      @all_books.each { |book| puts "#{book.label[:title]}" }
+      @all_books.each { |book| puts(book.label[:title]) }
       puts "\n\n"
     end
   end

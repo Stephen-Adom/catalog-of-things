@@ -1,10 +1,12 @@
 require 'json'
 require_relative 'modules/books.module'
+require_relative 'modules/data.module'
 
 class App
   attr_accessor :option, :all_books, :all_labels, :all_authors, :all_genres
 
   include BookModule
+  include LoadData
   include DisplayItem
 
   def initialize
@@ -43,6 +45,8 @@ class App
   end
 
   def run
+    load_data
+    puts @all_books.length
     loop do
       app_options
 
@@ -57,24 +61,6 @@ class App
       end
 
       check_option(@option)
-    end
-  end
-
-  def add_a_book(book)
-    @all_books << book
-  end
-
-  def load_books
-    return if File.exist?('data/books.json')
-
-    File.open('data/books.json') do |file|
-      @all_books << file.readlines
-    end
-  end
-
-  def save_books
-    File.open('data/books.json', 'a') do |file|
-      file.write JSON.dump(@all_genres)
     end
   end
 end
