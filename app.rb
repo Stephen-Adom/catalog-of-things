@@ -1,3 +1,4 @@
+require 'json'
 require_relative 'modules/books.module'
 
 class App
@@ -8,35 +9,10 @@ class App
 
   def initialize
     @all_books = []
-    @all_labels = [{
-      id: 1,
-      title: 'label 1',
-      color: 'red'
-    }]
-    @all_genres = [
-      {
-        id: 1,
-        name: 'Comedy'
-      },
-      {
-        id: 2,
-        name: 'Thriller'
-      }
-    ]
-    @all_authors = [
-      {
-        id: 1,
-        first_name: 'stephen',
-        last_name: 'addae'
-      }
-    ]
-
-    @all_genres = [
-      {
-        id: 1,
-        name: 'Thriller'
-      }
-    ]
+    @all_labels = []
+    @all_genres = []
+    @all_authors = []
+    @all_genres = []
   end
 
   def app_options
@@ -75,6 +51,7 @@ class App
       end
 
       if @option.to_i == 10
+        # save_books
         puts 'Thank you for using the app....'
         break
       end
@@ -92,6 +69,12 @@ class App
 
     File.open('data/books.json') do |file|
       @all_books << file.readlines
+    end
+  end
+
+  def save_books
+    File.open('data/books.json', 'a') do |file|
+      file.write JSON.dump(@all_genres)
     end
   end
 end
