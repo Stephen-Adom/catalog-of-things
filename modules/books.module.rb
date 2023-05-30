@@ -1,7 +1,5 @@
 require_relative '../classes/book'
 require_relative '../classes/label'
-require_relative '../classes/genre'
-require_relative '../classes/author'
 module BookModule
   def book_info
     # enter book label
