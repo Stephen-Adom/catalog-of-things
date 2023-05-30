@@ -1,9 +1,9 @@
 require 'date'
 
 class Item
-  att_reader :id, :archived
+  attr_reader :id, :archived
 
-  att_accessor :genre, :author, :source, :label, :publish_date
+  attr_accessor :genre, :author, :source, :label, :publish_date
 
   def initialize(genre, author, source, label, publish_date)
     @id = generate_id
