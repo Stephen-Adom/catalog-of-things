@@ -15,7 +15,6 @@ class GameLogic
     puts 'Enter game details:'
     print 'Genre: '
     genre = gets.chomp
-    author = AuthorLogic.find_or_create_author
     print 'Source: '
     source = gets.chomp
     print 'Label: '
@@ -26,6 +25,7 @@ class GameLogic
     multiplayer = gets.chomp.downcase == 'true'
     print 'Last played at (YYYY-MM-DD): '
     last_played_at = gets.chomp
+    author = AuthorLogic.find_or_create_author
 
     game = Game.new(genre, author, source, label, publish_date, multiplayer, Date.parse(last_played_at))
     save_game(game)
