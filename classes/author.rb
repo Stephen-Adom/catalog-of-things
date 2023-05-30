@@ -1,5 +1,5 @@
 class Author
-  attr_reader :id, :first_name, :last_name, :items
+  attr_accessor :id, :first_name, :last_name, :items
 
   def initialize(first_name, last_name)
     @id = generate_id
