@@ -59,8 +59,10 @@ class MusicAlbumApp
 
       album_data = Storage.read_file_content(@file_name)
       album_data.each do |album|
-        new_album = create(album['on_spotify'], album['publish_date'])
-        new_album.genre = GenreApp.create(album['genre']['name'])
+        genre = GenreApp.create(album['genre']['name'])
+        label = Label.new(album['label']['title'] || '')
+        author = Author.new(album['author']['first_name'] || '', album['author']['last_name'] || '')
+        create(genre, author, label, album['on_spotify'], album['publish_date'])
       end
       @music_albums
     end
@@ -70,7 +72,11 @@ class MusicAlbumApp
       @music_albums.each do |item|
         albums.push({ id: item.id, publish_date: item.publish_date,
                       on_spotify: item.on_spotify, archived: item.archived,
-                      genre: { name: item.genre.name } })
+                      genre: { name: item.genre.name }, label: { title: item.label.title },
+                      author: {
+                        first_name: item.author.first_name,
+                        last_name: item.author.last_name
+                      } })
       end
       Storage.save_file_content(@file_name, albums)
     end
