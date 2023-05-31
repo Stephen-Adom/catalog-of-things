@@ -1,6 +1,5 @@
 require_relative '../modules/author_logic'
 
-require_relative '../modules/author_logic'
 require_relative '../classes/author'
 
 RSpec.describe AuthorLogic do

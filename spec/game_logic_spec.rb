@@ -1,6 +1,5 @@
 require_relative '../modules/game_logic'
 
-require_relative '../modules/game_logic'
 require_relative '../classes/game'
 require_relative '../classes/author'
 

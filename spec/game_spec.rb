@@ -1,6 +1,5 @@
 require_relative '../classes/game'
 
-require_relative '../classes/game'
 require_relative '../classes/author'
 
 RSpec.describe Game do
