@@ -27,7 +27,7 @@ class GameLogic
     last_played_at = gets.chomp
     author = AuthorLogic.find_or_create_author
 
-    game = Game.new(genre, author, label, publish_date, multiplayer, Date.parse(last_played_at))
+    game = Game.new(genre, author, label, publish_date, multiplayer: multiplayer, last_played_at: last_played_at)
     save_game(game)
   end
 

@@ -4,10 +4,10 @@ require 'json'
 class Game < Item
   attr_accessor :multiplayer, :last_played_at
 
-  def initialize(genre, author, label, publish_date, multiplayer, last_played_at)
+  def initialize(genre, author, label, publish_date, options = {})
     super(genre, author, label, publish_date)
-    @multiplayer = multiplayer
-    @last_played_at = last_played_at
+    @multiplayer = options[:multiplayer]
+    @last_played_at = options[:last_played_at]
   end
 
   def can_be_archived?
