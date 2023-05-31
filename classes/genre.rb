@@ -12,4 +12,8 @@ class Genre
     @items << item
     item.genre = self
   end
+
+  def update_id(id)
+    @id = id
+  end
 end

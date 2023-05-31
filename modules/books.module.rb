@@ -73,7 +73,7 @@ module BookModule
       create_author_obj(name)
     else
       author_exist = @all_authors.find { |author| create_author_full_name(author.first_name, author.last_name) == name }
-      author_exist.nil? ? create_author_obj(title) : author_exist
+      author_exist.nil? ? create_author_obj(name) : author_exist
     end
   end
 
@@ -81,7 +81,7 @@ module BookModule
     names = name.split
     new_author = Author.new(names[0].strip, names[1]&.strip)
     @all_authors << new_author
-    new_author.save_author_to_json(@all_authors)
+    AuthorLogic.save_author_to_json(@all_authors)
     new_author
   end
 
@@ -90,9 +90,18 @@ module BookModule
   end
 
   def create_book_genre(name)
-    new_genre = Genre.new(name)
+    if @all_genres.empty?
+      create_genre_obj(name)
+    else
+      genre_exist = @all_genres.find { |genre| genre.name == name }
+      genre_exist.nil? ? create_genre_obj(name) : genre_exist
+    end
+  end
+
+  def create_genre_obj(name)
+    new_genre = GenreApp.create(name)
     @all_genres << new_genre
-    new_genre.save_genre_to_json(@all_genres)
+    GenreApp.save_genre_to_json(@all_genres)
     new_genre
   end
 end
@@ -117,8 +126,6 @@ module DisplayItem
     print "Publish-date: #{book.publish_date} "
     print "Publisher: #{book.publisher} "
     print "cover state: #{book.cover_state}"
-  rescue NoMethodError
-    'No Method Error'
   end
 
   def list_all_labels

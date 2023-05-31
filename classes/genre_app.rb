@@ -45,5 +45,17 @@ class GenreApp
       end
       Storage.save_file_content(@file_name, genres)
     end
+
+    def save_genre_to_json(all_genres)
+      File.write('data/genres.json', JSON.dump(
+                                       all_genres.map do |genre|
+                                         {
+                                           id: genre.id,
+                                           name: genre.name,
+                                           items: []
+                                         }
+                                       end
+                                     ))
+    end
   end
 end

@@ -2,33 +2,7 @@ require 'rspec'
 require_relative '../classes/music'
 require_relative '../classes/genre'
 require_relative '../classes/label'
-
-class Author
-  attr_reader :id, :items
-  attr_accessor :first_name, :last_name
-
-  def initialize(first_name, last_name)
-    @id = generate_id
-    @first_name = first_name
-    @last_name = last_name
-    @items = []
-  end
-
-  def add_item(item)
-    @items << item unless @items.include?(item)
-    item.author = self
-  end
-
-  def update_id(id)
-    @id = id
-  end
-
-  private
-
-  def generate_id
-    (rand * 1000).floor
-  end
-end
+require_relative '../classes/author'
 
 describe MusicAlbum do
   before :each do
