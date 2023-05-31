@@ -1,7 +1,11 @@
 require 'json'
 require_relative '../item'
+require 'fileutils'
 
 class AuthorLogic
+  DATA_FOLDER = 'data'.freeze
+  AUTHORS_FILE = File.join(DATA_FOLDER, 'authors.json').freeze
+
   def self.list_authors
     authors = load_authors
     puts 'List of Authors:'
@@ -19,13 +23,14 @@ class AuthorLogic
   end
 
   def self.save_authors(authors)
-    File.write('authors.json', authors.to_json)
+    File.write(AUTHORS_FILE, authors.to_json)
     puts 'Authors saved successfully.'
   end
 
   def self.load_authors
-    if File.exist?('authors.json')
-      JSON.parse(File.read('authors.json'))
+    FileUtils.mkdir_p(DATA_FOLDER) unless File.directory?(DATA_FOLDER)
+    if File.exist?(AUTHORS_FILE)
+      JSON.parse(File.read(AUTHORS_FILE))
     else
       []
     end
@@ -53,7 +58,6 @@ class AuthorLogic
       author = authors[choice - 1]
       puts 'Author found.'
       build_author_object(author)
-
     else
       puts 'Invalid choice. Please try again.'
       find_or_create_author

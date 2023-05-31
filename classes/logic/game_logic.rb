@@ -1,8 +1,12 @@
 require_relative '../item'
 require_relative 'author_logic'
 require 'json'
+require 'fileutils'
 
 class GameLogic
+  DATA_FOLDER = 'data'.freeze
+  GAMES_FILE = File.join(DATA_FOLDER, 'games.json').freeze
+
   def self.list_games
     games = load_games
     puts 'List of Games:'
@@ -34,7 +38,7 @@ class GameLogic
   def self.save_game(game)
     games = load_games
     games << serialize_game(game)
-    File.write('games.json', JSON.generate(games))
+    File.write(GAMES_FILE, JSON.generate(games))
     puts 'Game saved successfully.'
   end
 
@@ -52,8 +56,9 @@ class GameLogic
   end
 
   def self.load_games
-    if File.exist?('games.json')
-      games_data = File.read('games.json')
+    FileUtils.mkdir_p(DATA_FOLDER) unless File.directory?(DATA_FOLDER)
+    if File.exist?(GAMES_FILE)
+      games_data = File.read(GAMES_FILE)
       games_data.empty? ? [] : JSON.parse(games_data)
     else
       []
