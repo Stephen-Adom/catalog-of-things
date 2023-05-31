@@ -51,7 +51,8 @@ class App
         MusicAlbumApp.list_albums
       when 3
         GameLogic.list_games
-
+      when 4
+        GenreApp.list_genres
       when 5
         list_all_labels
       end
