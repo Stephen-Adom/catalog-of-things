@@ -41,29 +41,44 @@ class AuthorLogic
 
     if authors.empty?
       puts 'No authors found. Please enter new author details.'
-      create_new_author
-    else
-      puts 'Select an author from the list (enter the corresponding number) or enter 0 to enter a new author:'
-      authors.each_with_index do |author, index|
-        puts "#{index + 1}. #{author['first_name']} #{author['last_name']}"
-      end
-
-      print 'Your choice: '
-      choice = gets.chomp.to_i
-
-      if choice.zero?
-        create_new_author
-      elsif choice >= 1 && choice <= authors.size
-        author = authors[choice - 1]
-        puts 'Author found.'
-        author_object = Author.new(author['first_name'], author['last_name'])
-        author_object.id = author['id']
-        author_object
-      else
-        puts 'Invalid choice. Please try again.'
-        find_or_create_author
-      end
+      return create_new_author
     end
+
+    display_author_list(authors)
+    choice = get_user_choice(authors.size)
+
+    if choice.zero?
+      create_new_author
+    elsif choice >= 1 && choice <= authors.size
+      author = authors[choice - 1]
+      puts 'Author found.'
+      build_author_object(author)
+
+    else
+      puts 'Invalid choice. Please try again.'
+      find_or_create_author
+    end
+  end
+
+  def self.display_author_list(authors)
+    puts 'Select an author from the list (enter the corresponding number) or enter 0 to enter a new author:'
+    authors.each_with_index do |author, index|
+      puts "#{index + 1}. #{author['first_name']} #{author['last_name']}"
+    end
+  end
+
+  def self.get_user_choice(max_choice)
+    print 'Your choice: '
+    choice = gets.chomp.to_i
+    return choice if choice.between?(0, max_choice)
+
+    choice
+  end
+
+  def self.build_author_object(author)
+    author_object = Author.new(author['first_name'], author['last_name'])
+    author_object.id = author['id']
+    author_object
   end
 
   def self.create_new_author
