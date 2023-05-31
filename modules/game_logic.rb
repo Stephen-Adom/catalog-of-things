@@ -1,4 +1,4 @@
-require_relative '../item'
+require_relative '../classes/item'
 require_relative 'author_logic'
 require 'json'
 require 'fileutils'

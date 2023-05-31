@@ -1,5 +1,5 @@
-require_relative './classes/logic/game_logic'
-require_relative './classes/logic/author_logic'
+require_relative './modules/game_logic'
+require_relative './modules/author_logic'
 
 class App
   attr_accessor :option

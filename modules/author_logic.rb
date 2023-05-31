@@ -1,5 +1,5 @@
 require 'json'
-require_relative '../item'
+require_relative '../classes/item'
 require 'fileutils'
 
 class AuthorLogic
