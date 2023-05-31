@@ -1,6 +1,8 @@
+
 require 'json'
 require_relative 'modules/books.module'
 require_relative 'modules/data.module'
+require_relative './classes/music_album_app'
 
 class App
   attr_accessor :option, :all_books, :all_labels, :all_authors, :all_genres
@@ -17,7 +19,10 @@ class App
     @all_genres = []
   end
 
+  MusicAlbumApp.new
+
   def app_options
+    puts "\n\n"
     puts 'Please choose an option by entering a number:'
     puts '1 - List all books'
     puts '2 - List all music albums'
@@ -37,10 +42,16 @@ class App
     case option.to_i
     when 1
       list_all_books
+    when 2
+      MusicAlbumApp.list_albums
     when 5
       list_all_labels
     when 7
       book_info
+    when 10
+      MusicAlbumApp.add_album
+    else
+      puts 'Option not available'
     end
   end
 
