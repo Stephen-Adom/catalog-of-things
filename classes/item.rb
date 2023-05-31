@@ -2,7 +2,6 @@ require 'date'
 
 class Item
   attr_reader :id, :archived
-
   attr_accessor :genre, :author, :label, :publish_date
 
   def initialize(genre, author, label, publish_date)
@@ -29,6 +28,11 @@ class Item
   private
 
   def difference_between_years
+<<<<<<< HEAD
     Date.today.year - @publish_date.year
+=======
+    current_year = Date.today.year
+    current_year - @publish_date.year
+>>>>>>> dev
   end
 end

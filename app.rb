@@ -1,6 +1,8 @@
 require 'json'
 require_relative 'modules/books.module'
 require_relative 'modules/data.module'
+require_relative './modules/game_logic'
+require_relative './modules/author_logic'
 require_relative './classes/music_album_app'
 
 class App
@@ -48,6 +50,13 @@ class App
     when 7
       book_info
     when 10
+    when 4
+      GameLogic.list_games
+    when 7
+      AuthorLogic.list_authors
+    when 11
+      GameLogic.add_game
+    when 10
       MusicAlbumApp.add_album
     else
       puts 'Option not available'
@@ -68,7 +77,7 @@ class App
         break
       end
 
-      check_option(@option)
+      check_option(@option.to_i)
     end
   end
 end
