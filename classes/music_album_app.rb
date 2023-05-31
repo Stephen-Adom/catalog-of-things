@@ -26,7 +26,7 @@ class MusicAlbumApp
       genre = GenreApp.add_genre
       print 'Enter author first name: '
       first_name = gets.chomp
-      print 'Enter authorast name: '
+      print 'Enter author last name: '
       last_name = gets.chomp
       print 'Adding a label title: '
       label_title = gets.chomp
