@@ -7,7 +7,9 @@ class GameLogic
     games = load_games
     puts 'List of Games:'
     games.each_with_index do |game, index|
-      puts "#{index + 1}. ID: #{game['id']}, Archived: #{game['archived']}, Genre: #{game['genre']}, Author: #{game['author']}, Label: #{game['label']}, Publish Date: #{game['publish_date']}, Multiplayer: #{game['multiplayer']}, Last Played At: #{game['last_played_at']}"
+      puts "#{index + 1}. ID: #{game['id']}, Archived: #{game['archived']}, Genre: #{game['genre']}, " \
+           "Author: #{game['author']}, Label: #{game['label']}, Publish Date: #{game['publish_date']}, " \
+           "Multiplayer: #{game['multiplayer']}, Last Played At: #{game['last_played_at']}"
     end
   end
 
