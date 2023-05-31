@@ -45,19 +45,18 @@ class App
       list_all_books
     when 2
       MusicAlbumApp.list_albums
+    when 3
+      GameLogic.list_games
     when 5
       list_all_labels
+    when 6
+      AuthorLogic.list_authors
     when 7
       book_info
-    when 10
-    when 4
-      GameLogic.list_games
-    when 7
-      AuthorLogic.list_authors
-    when 11
-      GameLogic.add_game
-    when 10
+    when 8
       MusicAlbumApp.add_album
+    when 9
+      GameLogic.add_game
     else
       puts 'Option not available'
     end
