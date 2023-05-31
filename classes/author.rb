@@ -13,6 +13,10 @@ class Author
     item.author = self
   end
 
+  def update_id(id)
+    @id = id
+  end
+
   private
 
   def generate_id

@@ -107,4 +107,16 @@ class AuthorLogic
       author_object
     end
   end
+
+  def self.save_author_to_json(all_authors)
+    File.write('data/authors.json', JSON.dump(
+                                      all_authors.map do |author|
+                                        {
+                                          id: author.id,
+                                          first_name: author.first_name,
+                                          last_name: author.last_name
+                                        }
+                                      end
+                                    ))
+  end
 end

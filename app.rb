@@ -4,6 +4,9 @@ require_relative 'modules/data.module'
 require_relative './modules/game_logic'
 require_relative './modules/author_logic'
 require_relative './classes/music_album_app'
+require_relative './classes/files_handler'
+require_relative './classes/genre_app'
+require 'pry'
 
 class App
   attr_accessor :option, :all_books, :all_labels, :all_authors, :all_genres
@@ -40,7 +43,7 @@ class App
   end
 
   def check_option(option)
-    if (1..5).include?(@option.to_i)
+    if (1..5).include?(option.to_i)
       case option.to_i
       when 1
         list_all_books
@@ -54,7 +57,7 @@ class App
       end
     else
 
-      check_option_two(@option.to_i)
+      check_option_two(option.to_i)
     end
   end
 
@@ -68,8 +71,6 @@ class App
       MusicAlbumApp.add_album
     when 9
       GameLogic.add_game
-    else
-      puts 'Option not available'
     end
   end
 
@@ -86,6 +87,8 @@ class App
         puts 'Thank you for using the app....'
         break
       end
+
+      check_option(@option)
     end
   end
 end
