@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-[{"id":457,"publish_date":"2021-12-12","on_spotify":true,"archived":false,"genre":{"name":"Rock and roll"}}]
-=======
-[{"id":412,"publish_date":"2023-05-05","on_spotify":true,"archived":false,"genre":{"name":"Test genre"}, "label":{"title":"test label name"},"author":{"first_name":"First name","last_name":"Last name"}}]
->>>>>>> c53989b5435bc9e976f66e426247e0a23e777738
+[{"id":819,"publish_date":"2012-12-12","on_spotify":false,"archived":false,"genre":{"name":"hansom"},"label":{"title":"horror"},"author":{"first_name":"hanson","last_name":"gretta"}}]
