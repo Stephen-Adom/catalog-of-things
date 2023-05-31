@@ -21,7 +21,7 @@ class App
   MusicAlbumApp.new
 
   def app_options
-    puts "\n\n"
+    puts "Welcome to Catalog App!\n"
     puts 'Please choose an option by entering a number:'
     puts '1 - List all books'
     puts '2 - List all music albums'
