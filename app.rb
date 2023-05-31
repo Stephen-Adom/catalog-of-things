@@ -1,10 +1,14 @@
 require_relative './modules/game_logic'
 require_relative './modules/author_logic'
+require_relative './classes/music_album_app'
 
 class App
   attr_accessor :option
 
+  MusicAlbumApp.new
+
   def app_options
+    puts "\n\n"
     puts 'Please choose an option by entering a number:'
     puts '1 - List all books'
     puts '2 - List all music albums'
@@ -24,14 +28,18 @@ class App
 
   def check_option(option)
     case option
+    when 2
+      MusicAlbumApp.list_albums
     when 4
       GameLogic.list_games
     when 7
       AuthorLogic.list_authors
     when 11
       GameLogic.add_game
+    when 10
+      MusicAlbumApp.add_album
     else
-      puts 'Invalid option'
+      puts 'Option not available'
     end
   end
 
