@@ -40,15 +40,26 @@ class App
   end
 
   def check_option(option)
-    case option.to_i
-    when 1
-      list_all_books
-    when 2
-      MusicAlbumApp.list_albums
-    when 3
-      GameLogic.list_games
-    when 5
-      list_all_labels
+    if (1..5).include?(@option.to_i)
+      case option.to_i
+      when 1
+        list_all_books
+      when 2
+        MusicAlbumApp.list_albums
+      when 3
+        GameLogic.list_games
+
+      when 5
+        list_all_labels
+      end
+    else
+
+      check_option_two(@option.to_i)
+    end
+  end
+
+  def check_option_two(option)
+    case option
     when 6
       AuthorLogic.list_authors
     when 7
@@ -75,8 +86,6 @@ class App
         puts 'Thank you for using the app....'
         break
       end
-
-      check_option(@option.to_i)
     end
   end
 end
