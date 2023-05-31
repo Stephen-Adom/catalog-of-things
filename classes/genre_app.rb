@@ -15,15 +15,15 @@ class GenreApp
     end
 
     def add_genre
-      puts 'Creating a genre....'
-      print 'Enter name of genre: '
+      puts 'Adding a genre ...'
+      print 'Name: '
       name = gets.chomp
       genre = create(name)
       puts 'Genre created successfully'
       genre
     end
 
-    def list_all
+    def list_genres
       puts "Loading all genres ... \n"
       return puts 'No music genres found' if @genres.empty?
 

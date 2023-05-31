@@ -1,6 +1,8 @@
 require_relative './files_handler'
 require_relative './genre_app'
 require_relative './music'
+require_relative './label'
+require_relative './author'
 
 class MusicAlbumApp
   @music_albums = []
@@ -9,24 +11,32 @@ class MusicAlbumApp
   class << self
     attr_reader :music_albums
 
-    def create(on_spotify, publish_date)
-      new_album = MusicAlbum.new(on_spotify, publish_date)
+    def create(genre, author, label, on_spotify, publish_date)
+      new_album = MusicAlbum.new(genre, author, label, on_spotify, publish_date)
       @music_albums << new_album
       new_album
     end
 
     def add_album
-      puts 'Creating Music Album...'
       print 'Enter publish date as (yyyy-mm-dd): '
       publish_date = gets.chomp
       print 'Is it on shopify ? Enter YES(Y) and NO(N): '
       on_spotify = gets.chomp
       on_spotify = on_spotify.upcase == 'Y'
-      puts 'Please add genre for your music album'
       genre = GenreApp.add_genre
-      music_album = create(on_spotify, publish_date)
-      music_album.genre = genre
+      print 'Enter author first name: '
+      first_name = gets.chomp
+      print 'Enter author last name: '
+      last_name = gets.chomp
+      print 'Adding a label title: '
+      label_title = gets.chomp
+
+      label = Label.new(label_title)
+      author = Author.new(first_name, last_name)
+      music_album = create(genre, author, label, on_spotify, publish_date)
       genre.add_item(music_album) unless genre.items.include?(music_album)
+      label.add_item(music_album)
+      author.add_item(music_album)
       save_albums
       GenreApp.save_genres
     end
@@ -40,6 +50,7 @@ class MusicAlbumApp
         print "#{index}) Publish Date: #{album.publish_date}, "
         print "On Spotify: #{album.on_spotify}, Genre: #{album.genre.name}"
       end
+      puts "\n"
     end
 
     def load_albums
@@ -48,8 +59,10 @@ class MusicAlbumApp
 
       album_data = Storage.read_file_content(@file_name)
       album_data.each do |album|
-        new_album = create(album['on_spotify'], album['publish_date'])
-        new_album.genre = GenreApp.create(album['genre']['name'])
+        genre = GenreApp.create(album['genre']['name'])
+        label = Label.new(album['label']['title'] || '')
+        author = Author.new(album['author']['first_name'] || '', album['author']['last_name'] || '')
+        create(genre, author, label, album['on_spotify'], album['publish_date'])
       end
       @music_albums
     end
@@ -59,7 +72,11 @@ class MusicAlbumApp
       @music_albums.each do |item|
         albums.push({ id: item.id, publish_date: item.publish_date,
                       on_spotify: item.on_spotify, archived: item.archived,
-                      genre: { name: item.genre.name } })
+                      genre: { name: item.genre.name }, label: { title: item.label.title },
+                      author: {
+                        first_name: item.author.first_name,
+                        last_name: item.author.last_name
+                      } })
       end
       Storage.save_file_content(@file_name, albums)
     end
