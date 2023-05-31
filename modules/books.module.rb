@@ -90,6 +90,15 @@ module BookModule
   end
 
   def create_book_genre(name)
+    if @all_genres.empty?
+      create_genre_obj(name)
+    else
+      genre_exist = @all_genres.find { |genre| genre.name == name }
+      genre_exist.nil? ? create_genre_obj(name) : genre_exist
+    end
+  end
+
+  def create_genre_obj(name)
     new_genre = GenreApp.create(name)
     @all_genres << new_genre
     GenreApp.save_genre_to_json(@all_genres)
