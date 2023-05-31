@@ -116,6 +116,8 @@ module DisplayItem
     print "Publish-date: #{book.publish_date} "
     print "Publisher: #{book.publisher} "
     print "cover state: #{book.cover_state}"
+  rescue NoMethodError
+    'No Method Error'
   end
 
   def list_all_labels
