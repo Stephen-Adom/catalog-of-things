@@ -19,7 +19,7 @@ class AuthorLogic
   end
 
   def self.save_authors(authors)
-    File.open('authors.json', 'w') { |file| file.write(authors.to_json) }
+    File.write('authors.json', authors.to_json)
     puts 'Authors saved successfully.'
   end
 
@@ -33,8 +33,7 @@ class AuthorLogic
 
   def self.find_author(first_name, last_name)
     authors = load_authors
-    author = authors.find { |a| a['first_name'] == first_name && a['last_name'] == last_name }
-    author
+    authors.find { |a| a['first_name'] == first_name && a['last_name'] == last_name }
   end
 
   def self.find_or_create_author
@@ -52,7 +51,7 @@ class AuthorLogic
       print 'Your choice: '
       choice = gets.chomp.to_i
 
-      if choice == 0
+      if choice.zero?
         create_new_author
       elsif choice >= 1 && choice <= authors.size
         author = authors[choice - 1]
