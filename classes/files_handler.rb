@@ -1,7 +1,7 @@
 require 'json'
 
 class Storage
-  @files_path = 'storage/'
+  @files_path = 'data/'
   class << self
     def path(filename)
       "#{@files_path}#{filename}"

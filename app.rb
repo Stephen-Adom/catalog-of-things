@@ -1,4 +1,7 @@
+require_relative './modules/game_logic'
+require_relative './modules/author_logic'
 require_relative './classes/music_album_app'
+
 class App
   attr_accessor :option
 
@@ -14,21 +17,26 @@ class App
     puts '5 - List all genres (e.g Comedy, Thriller)'
     puts '6 - List all labels (e.g Gift, New)'
     puts '7 - List all authors (e.g Stephen King)'
-    puts '8 - List all sources (e.g From a friend, Online shop)'
-    puts '9 - Add a book'
-    puts '10 - Add a music album'
-    puts '11 - Add a movie'
-    puts '12 - Add a game'
-    puts '13 - Exit'
-    print 'Your option '
-    @option = gets.chomp
+    puts '8 - Add a book'
+    puts '9 - Add a music album'
+    puts '10 - Add a movie'
+    puts '11 - Add a game'
+    puts '12 - Exit'
+    print 'Your option: '
+    @option = gets.chomp.to_i
   end
 
   def check_option(option)
     case option
-    when '2'
+    when 2
       MusicAlbumApp.list_albums
-    when '10'
+    when 4
+      GameLogic.list_games
+    when 7
+      AuthorLogic.list_authors
+    when 11
+      GameLogic.add_game
+    when 10
       MusicAlbumApp.add_album
     else
       puts 'Option not available'
@@ -39,16 +47,17 @@ class App
     loop do
       app_options
 
-      unless (1..13).include?(@option.to_i)
-        puts "Your input is invalid. Please enter then correct option value........\n"
+      unless (1..12).include?(@option.to_i)
+        puts "Your input is invalid. Please enter a correct option value.\n"
+        next
       end
 
-      if @option.to_i == 13
-        puts 'Thank you for using the app....'
+      if @option.to_i == 12
+        puts 'Thank you for using the app.'
         break
       end
 
-      check_option(@option)
+      check_option(@option.to_i)
     end
   end
 end

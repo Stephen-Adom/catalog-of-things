@@ -15,11 +15,13 @@ describe Genre do
     it 'should add the given item to the Genre' do
       genre = Genre.new('Pop')
       album = MusicAlbum.new(true, '2022-05-05')
+      album.genre = genre
 
       genre.add_item(album)
 
       expect(genre.items).to include(album)
       expect(album.genre).to eq(genre)
+      expect(album.genre.name).to eq('Pop')
     end
   end
 end
