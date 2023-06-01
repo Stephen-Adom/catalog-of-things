@@ -4,8 +4,6 @@ require_relative '../classes/game'
 require_relative '../classes/author'
 require_relative '../classes/label'
 
-require 'pry'
-
 RSpec.describe GameLogic do
   let(:author) { Author.new('John', 'Doe') }
   let(:publish_date) { Date.new(2020, 1, 1) }
