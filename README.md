@@ -2,7 +2,7 @@
 
 # 📗 Table of Contents
 
-- [� Table of Contents](#-table-of-contents)
+- [📗 Table of Contents](#-table-of-contents)
 - [📖 \[Catalog-of-things\] ](#-catalog-of-things-)
   - [🛠 Built With ](#-built-with-)
     - [Tech Stack ](#tech-stack-)
@@ -127,6 +127,11 @@ You can deploy this project using: **Not available**
 
 - GitHub: [@githubhandle](https://github.com/Amen-Musingarimi)
 - LinkedIn: [LinkedIn](https://linkedin.com/in/atmusingarimi/)
+
+👤 **Williams Serubiri**
+
+- GitHub: [@veronica365](https://github.com/veronica365)
+- LinkedIn: [LinkedIn](https://www.linkedin.com/in/william-sserubiri-veronica/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
