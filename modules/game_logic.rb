@@ -23,7 +23,7 @@ class GameLogic
     puts 'Enter game details:'
     print 'Genre: '
     genre = GenreApp.add_genre
-   
+
     label = LabelLogic.new.add_label
     print 'Publish date (YYYY-MM-DD): '
     publish_date = gets.chomp
@@ -48,9 +48,9 @@ class GameLogic
     {
       id: game.id,
       archived: game.archived,
-      genre: "#{game.genre.name}",
+      genre: game.genre.name.to_s,
       author: "#{game.author.first_name} #{game.author.last_name}",
-      label: "#{game.label.title}",
+      label: game.label.title.to_s,
       publish_date: game.publish_date.to_s,
       multiplayer: game.multiplayer,
       last_played_at: game.last_played_at.to_s
