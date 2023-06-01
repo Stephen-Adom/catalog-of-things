@@ -8,8 +8,7 @@ module BookModule
     input_label = gets.chomp
 
     # enter book author
-    print 'Enter book author (e.g Stephen King) : '
-    input_author = gets.chomp
+    input_author = AuthorLogic.find_or_create_author
 
     print 'Enter book genre(e.g Comedy, Thriller): '
     input_genre = gets.chomp
@@ -37,7 +36,7 @@ module BookModule
 
   def create_book_object(book_object)
     label_obj = create_book_label(book_object[:label])
-    author_obj = create_book_author(book_object[:author])
+    author_obj = book_object[:author]
     genre_obj = create_book_genre(book_object[:genre])
     new_book = Book.new(genre_obj, author_obj, label_obj, Date.parse(book_object[:published_date]),
                         book_object[:publisher])
@@ -66,23 +65,6 @@ module BookModule
     @all_labels << new_label
     new_label.save_label_to_json(@all_labels)
     new_label
-  end
-
-  def create_book_author(name)
-    if @all_authors.empty?
-      create_author_obj(name)
-    else
-      author_exist = @all_authors.find { |author| create_author_full_name(author.first_name, author.last_name) == name }
-      author_exist.nil? ? create_author_obj(name) : author_exist
-    end
-  end
-
-  def create_author_obj(name)
-    names = name.split
-    new_author = Author.new(names[0].strip, names[1]&.strip)
-    @all_authors << new_author
-    AuthorLogic.save_author_to_json(@all_authors)
-    new_author
   end
 
   def create_author_full_name(firstname, lastname)
