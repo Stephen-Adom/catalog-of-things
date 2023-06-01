@@ -2,8 +2,6 @@ require 'json'
 require_relative '../classes/item'
 require 'fileutils'
 
-require 'pry'
-
 class AuthorLogic
   DATA_FOLDER = 'data'.freeze
   AUTHORS_FILE = File.join(DATA_FOLDER, 'authors.json').freeze

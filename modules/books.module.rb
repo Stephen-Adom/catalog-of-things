@@ -1,11 +1,11 @@
 require_relative '../classes/book'
 require_relative '../classes/label'
 require_relative '../classes/genre'
+require_relative '../modules/author_logic'
 module BookModule
   def book_info
     # enter book label
-    print 'Enter book label (e.g Gift, New): '
-    input_label = gets.chomp
+    input_label = add_label
 
     # enter book author
     input_author = AuthorLogic.find_or_create_author
@@ -35,7 +35,7 @@ module BookModule
   end
 
   def create_book_object(book_object)
-    label_obj = create_book_label(book_object[:label])
+    label_obj = book_object[:label]
     author_obj = book_object[:author]
     genre_obj = create_book_genre(book_object[:genre])
     new_book = Book.new(genre_obj, author_obj, label_obj, Date.parse(book_object[:published_date]),
@@ -49,22 +49,6 @@ module BookModule
   def save_book(book)
     @all_books << book
     book.save_books_to_json(@all_books)
-  end
-
-  def create_book_label(title)
-    if @all_labels.empty?
-      create_label_obj(title)
-    else
-      label_exist = @all_labels.find { |label| label.title == title }
-      label_exist.nil? ? create_label_obj(title) : label_exist
-    end
-  end
-
-  def create_label_obj(title)
-    new_label = Label.new(title)
-    @all_labels << new_label
-    new_label.save_label_to_json(@all_labels)
-    new_label
   end
 
   def create_author_full_name(firstname, lastname)

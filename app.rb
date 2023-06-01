@@ -6,11 +6,13 @@ require_relative './modules/author_logic'
 require_relative './classes/music_album_app'
 require_relative './classes/files_handler'
 require_relative './classes/genre_app'
+require_relative 'modules/label_logic.rb'
 require 'pry'
 
 class App
   attr_accessor :option, :all_books, :all_labels, :all_authors, :all_genres
 
+include LabelLogic
   include BookModule
   include LoadData
   include DisplayItem
