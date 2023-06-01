@@ -9,8 +9,12 @@ class GenreApp
     attr_reader :genres
 
     def create(name)
+      genre = @genres.find { |a| a.name == name }
+      return genre unless genre.nil?
+
       new_genre = Genre.new(name)
       @genres << new_genre
+      save_genres
       new_genre
     end
 
@@ -25,17 +29,30 @@ class GenreApp
 
     def list_genres
       puts "Loading all genres ... \n"
+
       return puts 'No music genres found' if @genres.empty?
 
-      genre_data = Storage.read_file_content(@file_name)
-      genre_data.each_with_index do |genre, index|
-        puts "#{index}) Name: #{genre['name']}"
+      @genres.each_with_index do |genre, index|
+        puts "#{index}) Name: #{genre.name}"
       end
+    end
+
+    def load_genres
+      puts "Loading albums ... \n\n"
+
+      return @genres unless @genres.empty?
+
+      genres = Storage.read_file_content(@file_name)
+      genres.each do |genre|
+        new_genre = Genre.new(genre['name'])
+        new_genre.update_id(genre['id'])
+        @genres << new_genre
+      end
+      @genres
     end
 
     def save_genres
       genres = []
-      puts @genres
       @genres.each do |genre|
         albums = []
         genre.items.map do |album|
