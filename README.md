@@ -1,5 +1,3 @@
-# catalog-of-things
-
 <a name="readme-top"></a>
 
 # 📗 Table of Contents
@@ -50,15 +48,15 @@ A ruby-based console application to help you to keep a record of different types
 
 ### Key Features <a name="key-features"></a>
 
-- **[List all books]**
-- **[List all music albums]**
-- **[List all games]**
-- **[List all genres]**
-- **[List all labels]**
-- **[List all authors]**
-- **[Add a book]**
-- **[Add a music album]**
-- **[Add a game]**
+- **List all books**
+- **List all music albums**
+- **List all games**
+- **List all genres**
+- **List all labels**
+- **List all authors**
+- **Add a book**
+- **Add a music album**
+- **Add a game**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -112,7 +110,7 @@ You can deploy this project using: **Not available**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## 👥 Author <a name="author"></a>
+## 👥 Authors <a name="authors"></a>
 
 👤 **Stephen Addae**
 
