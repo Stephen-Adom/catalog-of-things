@@ -2,13 +2,15 @@ require_relative './files_handler'
 require_relative './genre_app'
 require_relative './music'
 require_relative './label'
-require_relative './author'
+require_relative '../modules/author_logic'
+require_relative '../modules/books.module'
 
 class MusicAlbumApp
   @music_albums = []
   @file_name = 'music_albums.json'
 
   class << self
+    include BookModule
     attr_reader :music_albums
 
     def create(genre, author, label, on_spotify, publish_date)
@@ -24,15 +26,11 @@ class MusicAlbumApp
       on_spotify = gets.chomp
       on_spotify = on_spotify.upcase == 'Y'
       genre = GenreApp.add_genre
-      print 'Enter author first name: '
-      first_name = gets.chomp
-      print 'Enter author last name: '
-      last_name = gets.chomp
+      author = AuthorLogic.create_new_author
       print 'Adding a label title: '
       label_title = gets.chomp
 
       label = Label.new(label_title)
-      author = Author.new(first_name, last_name)
       music_album = create(genre, author, label, on_spotify, publish_date)
       genre.add_item(music_album) unless genre.items.include?(music_album)
       label.add_item(music_album)
@@ -43,12 +41,11 @@ class MusicAlbumApp
 
     def list_albums
       puts "\nListing music albums ...\n"
-      load_albums
-      return puts 'There are no music albums' unless music_albums.length.positive?
+      return puts 'There are no music albums' if @music_albums.empty?
 
       @music_albums.each_with_index do |album, index|
         print "#{index}) Publish Date: #{album.publish_date}, "
-        print "On Spotify: #{album.on_spotify}, Genre: #{album.genre.name}"
+        print "On Spotify: #{album.on_spotify}, Genre: #{album.genre.name}\n"
       end
       puts "\n"
     end
@@ -61,7 +58,8 @@ class MusicAlbumApp
       album_data.each do |album|
         genre = GenreApp.create(album['genre']['name'])
         label = Label.new(album['label']['title'] || '')
-        author = Author.new(album['author']['first_name'] || '', album['author']['last_name'] || '')
+        author = AuthorLogic.create_or_find_author(album['author']['first_name'] || '',
+                                                   album['author']['last_name'] || '')
         create(genre, author, label, album['on_spotify'], album['publish_date'])
       end
       @music_albums

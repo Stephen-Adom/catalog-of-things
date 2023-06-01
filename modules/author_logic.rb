@@ -93,6 +93,10 @@ class AuthorLogic
     print 'Enter Author Last Name: '
     last_name = gets.chomp
 
+    create_or_find_author(first_name, last_name)
+  end
+
+  def self.create_or_find_author(first_name, last_name)
     authors = load_authors
     existing_author = authors.find { |a| a['first_name'] == first_name && a['last_name'] == last_name }
 

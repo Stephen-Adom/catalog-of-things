@@ -22,8 +22,6 @@ class App
     load_data
   end
 
-  MusicAlbumApp.new
-
   def app_options
     puts "Welcome to Catalog App!\n"
     puts 'Please choose an option by entering a number:'
@@ -75,6 +73,9 @@ class App
   end
 
   def run
+    load_data
+    GenreApp.load_genres
+    MusicAlbumApp.load_albums
     loop do
       app_options
 
