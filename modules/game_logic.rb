@@ -1,6 +1,7 @@
 require_relative '../classes/item'
 require_relative '../classes/genre_app'
 require_relative 'author_logic'
+require_relative './label_logic'
 require 'json'
 require 'fileutils'
 
@@ -47,7 +48,7 @@ class GameLogic
     {
       id: game.id,
       archived: game.archived,
-      genre: game.genre,
+      genre: "#{game.genre.name}",
       author: "#{game.author.first_name} #{game.author.last_name}",
       label: game.label,
       publish_date: game.publish_date.to_s,
