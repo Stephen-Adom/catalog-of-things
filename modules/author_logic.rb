@@ -28,6 +28,8 @@ class AuthorLogic
   end
 
   def self.load_authors
+    return [] if File.empty?(AUTHORS_FILE)
+
     FileUtils.mkdir_p(DATA_FOLDER) unless File.directory?(DATA_FOLDER)
     if File.exist?(AUTHORS_FILE)
       JSON.parse(File.read(AUTHORS_FILE))

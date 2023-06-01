@@ -1,1 +1,4 @@
-[{"id":360,"first_name":"Stephen","last_name":"King"},{"id":252,"first_name":"Amen","last_name":"Musingarimi"}]
+[
+  { "id": 360, "first_name": "Stephen", "last_name": "King" },
+  { "id": 252, "first_name": "Amen", "last_name": "Musingarimi" }
+]
