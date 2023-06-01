@@ -6,8 +6,6 @@ require_relative './modules/author_logic'
 require_relative './classes/music_album_app'
 require_relative './classes/files_handler'
 require_relative './classes/genre_app'
-require 'pry'
-
 class App
   attr_accessor :option, :all_books, :all_labels, :all_authors, :all_genres
 
@@ -21,9 +19,8 @@ class App
     @all_genres = []
     @all_authors = []
     @all_genres = []
+    load_data
   end
-
-  MusicAlbumApp.new
 
   def app_options
     puts "Welcome to Catalog App!\n"
@@ -76,7 +73,8 @@ class App
   end
 
   def run
-    load_data
+    GenreApp.load_genres
+    MusicAlbumApp.load_albums
     loop do
       app_options
 
