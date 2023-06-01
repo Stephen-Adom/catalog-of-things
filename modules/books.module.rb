@@ -2,10 +2,12 @@ require_relative '../classes/book'
 require_relative '../classes/label'
 require_relative '../classes/genre'
 require_relative '../modules/author_logic'
+require_relative '../modules/label_logic'
+
 module BookModule
   def book_info
     # enter book label
-    input_label = add_label
+    input_label = LabelLogic.new.add_label
 
     # enter book author
     input_author = AuthorLogic.find_or_create_author
@@ -95,10 +97,12 @@ module DisplayItem
   end
 
   def list_all_labels
-    if @all_labels.empty?
+    all_labels = LabelLogic.new.load_labels
+
+    if all_labels.empty?
       puts "No labels available!!!\n\n"
     else
-      @all_labels.each { |label| puts "Id: #{label.id} Label: #{label.title} Color: #{label.color}" }
+      all_labels.each { |label| puts "Id: #{label.id} Label: #{label.title} Color: #{label.color}" }
       puts "\n"
     end
   end
