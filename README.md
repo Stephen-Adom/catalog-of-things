@@ -2,20 +2,25 @@
 
 # 📗 Table of Contents
 
-- [📖 About the Project](#about-project)
-  - [🛠 Built With](#built-with)
-    - [Tech Stack](#tech-stack)
-    - [Key Features](#key-features)
-  - [💻 Getting Started](#getting-started)
-  - [Setup](#setup)
-  - [Prerequisites](#prerequisites)
-  - [👥 Authors](#authors)
-- [🔭 Future Features](#future-features)
-- [🤝 Contributing](#contributing)
-- [⭐️ Show your support](#support)
-- [🙏 Acknowledgements](#acknowledgements)
-- [❓ FAQ (OPTIONAL)](#faq)
-- [📝 License](#license)
+- [� Table of Contents](#-table-of-contents)
+- [📖 \[Catalog-of-things\] ](#-catalog-of-things-)
+  - [🛠 Built With ](#-built-with-)
+    - [Tech Stack ](#tech-stack-)
+    - [Key Features ](#key-features-)
+  - [💻 Getting Started ](#-getting-started-)
+    - [Prerequisites](#prerequisites)
+    - [Setup](#setup)
+    - [Install](#install)
+    - [Usage](#usage)
+    - [Run tests](#run-tests)
+    - [Deployment](#deployment)
+  - [👥 Authors ](#-authors-)
+  - [🔭 Future Features ](#-future-features-)
+  - [🤝 Contributing ](#-contributing-)
+  - [⭐️ Show your support ](#️-show-your-support-)
+  - [🙏 Acknowledgments ](#-acknowledgments-)
+  - [❓ FAQ (OPTIONAL) ](#-faq-optional-)
+  - [📝 License ](#-license-)
 
 # 📖 [Catalog-of-things] <a name="about-project"></a>
 
@@ -117,6 +122,11 @@ You can deploy this project using: **Not available**
 - GitHub: [@Stephen-Adom](https://github.com/Stephen-Adom)
 - Twitter: [@stephen_alaska](https://twitter.com/stephen_alaska)
 - LinkedIn: [Stephen Addae](https://www.linkedin.com/in/stephen-addae/)
+
+👤 **AmenMusingarimi**
+
+- GitHub: [@githubhandle](https://github.com/Amen-Musingarimi)
+- LinkedIn: [LinkedIn](https://linkedin.com/in/atmusingarimi/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
