@@ -1,67 +1,8 @@
 require_relative '../app'
 require_relative '../classes/label'
 require_relative '../classes/files_handler'
-
-class Genre
-  attr_reader :id, :items
-  attr_accessor :name
-
-  def initialize(name)
-    @id = generate_id
-    @name = name
-    @items = []
-  end
-
-  def add_item(item)
-    @items << item unless @items.include?(item)
-    item.genre = self
-  end
-
-  def update_id(id)
-    @id = id
-  end
-
-  def save_genre_to_json(_all_genres)
-    true
-  end
-
-  private
-
-  def generate_id
-    (rand * 1000).floor
-  end
-end
-
-class Author
-  attr_reader :id, :items
-  attr_accessor :first_name, :last_name
-
-  def initialize(first_name, last_name)
-    @id = generate_id
-    @first_name = first_name
-    @last_name = last_name
-    @items = []
-  end
-
-  def add_item(item)
-    @items << item unless @items.include?(item)
-    item.author = self
-  end
-
-  def update_id(id)
-    @id = id
-  end
-
-  def save_author_to_json(_all_authors)
-    true
-  end
-
-  private
-
-  def generate_id
-    (rand * 1000).floor
-  end
-end
+require_relative '../classes/genre'
+require_relative '../classes/author'
 
 describe 'App' do
   let(:app) { App.new }

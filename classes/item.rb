@@ -1,8 +1,8 @@
 require 'date'
 
 class Item
-  attr_reader :id, :archived
-  attr_accessor :genre, :author, :label, :publish_date
+  attr_reader :id, :archived, :genre
+  attr_accessor :author, :label, :publish_date
 
   def initialize(genre, author, label, publish_date)
     @id = generate_id
@@ -18,16 +18,28 @@ class Item
   end
 
   def can_be_archived?
-    difference_between_years > 10
+    today = Date.today
+    ten_years_ago = Date.new(today.year - 10, today.month, today.day)
+
+    Date.parse(@publish_date) < ten_years_ago
   end
 
   def move_to_archive
     @archived = true if can_be_archived?
   end
 
-  private
+  def genre=(genre)
+    @genre = genre
+    genre.items << self unless genre.items.include?(self)
+  end
 
-  def difference_between_years
-    Date.today.year - @publish_date.year
+  def music=(music)
+    @music = music
+    music.items << self unless music.items.include?(self)
+  end
+
+  def book=(book)
+    @book = book
+    book.items << self unless book.items.include?(self)
   end
 end
