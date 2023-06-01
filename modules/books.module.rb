@@ -3,6 +3,7 @@ require_relative '../classes/label'
 require_relative '../classes/genre'
 require_relative '../modules/author_logic'
 require_relative '../modules/label_logic'
+require_relative '../classes/genre_app'
 
 module BookModule
   def book_info
@@ -12,8 +13,7 @@ module BookModule
     # enter book author
     input_author = AuthorLogic.find_or_create_author
 
-    print 'Enter book genre(e.g Comedy, Thriller): '
-    input_genre = gets.chomp
+    input_genre = GenreApp.add_genre
 
     # enter book publisher
     print 'Enter publisher: '
@@ -39,7 +39,7 @@ module BookModule
   def create_book_object(book_object)
     label_obj = book_object[:label]
     author_obj = book_object[:author]
-    genre_obj = create_book_genre(book_object[:genre])
+    genre_obj = book_object[:genre]
     new_book = Book.new(genre_obj, author_obj, label_obj, Date.parse(book_object[:published_date]),
                         book_object[:publisher])
 
@@ -55,22 +55,6 @@ module BookModule
 
   def create_author_full_name(firstname, lastname)
     "#{firstname} #{lastname}"
-  end
-
-  def create_book_genre(name)
-    if @all_genres.empty?
-      create_genre_obj(name)
-    else
-      genre_exist = @all_genres.find { |genre| genre.name == name }
-      genre_exist.nil? ? create_genre_obj(name) : genre_exist
-    end
-  end
-
-  def create_genre_obj(name)
-    new_genre = GenreApp.create(name)
-    @all_genres << new_genre
-    GenreApp.save_genre_to_json(@all_genres)
-    new_genre
   end
 end
 
