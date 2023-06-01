@@ -6,7 +6,7 @@ class LabelLogic
   end
 
   def add_label
-    print 'Enter book label (e.g Gift, New): '
+    print 'Enter label (e.g Gift, New): '
     input_label = gets.chomp
     create_book_label(input_label)
   end

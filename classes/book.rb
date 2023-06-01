@@ -1,6 +1,5 @@
 require_relative 'item'
 require 'date'
-require 'pry'
 
 class Book < Item
   attr_accessor :publisher, :cover_state

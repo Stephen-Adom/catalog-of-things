@@ -38,8 +38,6 @@ class GenreApp
     end
 
     def load_genres
-      puts "Loading albums ... \n\n"
-
       return @genres unless @genres.empty?
 
       genres = Storage.read_file_content(@file_name)

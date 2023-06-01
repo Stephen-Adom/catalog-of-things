@@ -50,7 +50,6 @@ class MusicAlbumApp
     end
 
     def load_albums
-      puts "Loading albums ... \n\n"
       return @music_albums unless @music_albums.empty?
 
       album_data = Storage.read_file_content(@file_name)
