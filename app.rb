@@ -73,7 +73,6 @@ class App
   end
 
   def run
-    load_data
     GenreApp.load_genres
     MusicAlbumApp.load_albums
     loop do

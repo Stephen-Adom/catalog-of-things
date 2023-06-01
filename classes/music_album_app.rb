@@ -3,14 +3,13 @@ require_relative './genre_app'
 require_relative './music'
 require_relative './label'
 require_relative '../modules/author_logic'
-require_relative '../modules/books.module'
+require_relative '../modules/label_logic'
 
 class MusicAlbumApp
   @music_albums = []
   @file_name = 'music_albums.json'
 
   class << self
-    include BookModule
     attr_reader :music_albums
 
     def create(genre, author, label, on_spotify, publish_date)
@@ -30,7 +29,7 @@ class MusicAlbumApp
       print 'Adding a label title: '
       label_title = gets.chomp
 
-      label = Label.new(label_title)
+      label = LabelLogic.new.create_book_label(label_title)
       music_album = create(genre, author, label, on_spotify, publish_date)
       genre.add_item(music_album) unless genre.items.include?(music_album)
       label.add_item(music_album)
@@ -57,7 +56,7 @@ class MusicAlbumApp
       album_data = Storage.read_file_content(@file_name)
       album_data.each do |album|
         genre = GenreApp.create(album['genre']['name'])
-        label = Label.new(album['label']['title'] || '')
+        label = LabelLogic.new.create_book_label(album['label']['title'] || '')
         author = AuthorLogic.create_or_find_author(album['author']['first_name'] || '',
                                                    album['author']['last_name'] || '')
         create(genre, author, label, album['on_spotify'], album['publish_date'])
