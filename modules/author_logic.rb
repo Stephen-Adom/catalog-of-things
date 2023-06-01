@@ -107,7 +107,6 @@ class AuthorLogic
       puts 'Author created and saved successfully.'
       author
     else
-      puts 'Author already exists.'
       author_object = Author.new(existing_author['first_name'], existing_author['last_name'])
       author_object.id = existing_author['id']
       author_object
