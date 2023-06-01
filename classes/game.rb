@@ -17,6 +17,6 @@ class Game < Item
   private
 
   def last_played_more_than_two_years_ago?
-    (Date.today - @last_played_at) > 365 * 2
+    (Date.today - @last_played_at).to_i  > 365 * 2
   end
 end

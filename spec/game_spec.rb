@@ -1,23 +1,46 @@
 require_relative '../classes/game'
 
-require_relative '../classes/author'
+describe Game do
+  let(:genre) { 'Action' }
+  let(:author) { 'John Doe' }
+  let(:label) { 'Game Publisher' }
+  let(:publish_date) { Date.new(2010, 1, 1) }
 
-RSpec.describe Game do
-  let(:author) { Author.new('John', 'Doe') }
-  let(:publish_date) { Date.new(2020, 1, 1) }
-  let(:game) { Game.new('Action', author, 'Game Label', publish_date) }
-
-  describe '#can_be_archived?' do
-    it 'returns true if the game can be archived' do
-      allow(Date).to receive(:today).and_return(Date.new(2032, 1, 1))
-      allow(game).to receive(:last_played_more_than_two_years_ago?).and_return(true)
-      expect(game.can_be_archived?).to be true
+  describe '#initialize' do
+    it 'creates a new Game object' do
+      game = Game.new(genre, author, label, publish_date)
+      expect(game).to be_an_instance_of(Game)
+      expect(game.genre).to eq(genre)
+      expect(game.author).to eq(author)
+      expect(game.label).to eq(label)
+      expect(game.publish_date).to eq(publish_date)
+      expect(game.multiplayer).to be_nil
+      expect(game.last_played_at).to be_nil
     end
 
-    it 'returns false if the game cannot be archived' do
-      allow(Date).to receive(:today).and_return(Date.new(2025, 1, 1))
-      allow(game).to receive(:last_played_more_than_two_years_ago?).and_return(false)
-      expect(game.can_be_archived?).to be false
+    it 'creates a new Game object with multiplayer and last_played_at options' do
+      options = { multiplayer: true, last_played_at: Date.new(2022, 1, 1) }
+      game = Game.new(genre, author, label, publish_date, options)
+      expect(game.multiplayer).to eq(true)
+      expect(game.last_played_at).to eq(Date.new(2022, 1, 1))
+    end
+  end
+
+  describe '#can_be_archived?' do
+    context 'when the game is eligible for archiving' do
+      it 'returns true' do
+        options = { multiplayer: true, last_played_at: Date.new(2018, 1, 1) }
+        game = Game.new(genre, author, label, publish_date, options)
+        expect(game.can_be_archived?).to be(true)
+      end
+    end
+
+    context 'when the game is not eligible for archiving' do
+      it 'returns false' do
+        options = { multiplayer: true, last_played_at: Date.today }
+        game = Game.new(genre, author, label, publish_date, options)
+        expect(game.can_be_archived?).to be(false)
+      end
     end
   end
 end
