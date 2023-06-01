@@ -1,4 +1,5 @@
 require_relative '../classes/item'
+require_relative '../classes/genre_app'
 require_relative 'author_logic'
 require 'json'
 require 'fileutils'
@@ -20,7 +21,7 @@ class GameLogic
   def self.add_game
     puts 'Enter game details:'
     print 'Genre: '
-    genre = gets.chomp
+    genre = GenreApp.add_genre
     print 'Label: '
     label = gets.chomp
     print 'Publish date (YYYY-MM-DD): '
