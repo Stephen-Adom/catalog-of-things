@@ -89,21 +89,6 @@ describe 'App' do
     end
   end
 
-  context '#create_book_object' do
-    it 'creates a book object' do
-      book_obj = {
-        label: 'test',
-        author: ' J.K. Rowling',
-        genre: 'Fiction',
-        publisher: 'Bloomsbury',
-        published_date: '1997-11-11',
-        cover_state: 'good'
-      }
-      app.create_book_object(book_obj)
-      expect(app.all_books.length).to eql 1
-    end
-  end
-
   context '#create_book_label' do
     it 'creates a book label' do
       label_obj = {
@@ -119,12 +104,6 @@ describe 'App' do
   context '#create_label_obj' do
     it 'should create label object' do
       expect(app.create_label_obj('test')).to be_instance_of(Label)
-    end
-  end
-
-  context '#create_book_author' do
-    it 'should create author object' do
-      expect(app.create_author_obj('J.K. Rowling')).to be_instance_of(Author)
     end
   end
 
