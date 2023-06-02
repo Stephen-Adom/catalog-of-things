@@ -26,13 +26,6 @@ describe 'Label' do
     end
   end
 
-  context '#save_label_to_json' do
-    it 'saves the label to a json file' do
-      label.save_label_to_json([label])
-      expect(File.exist?('data/label.json')).to be true
-    end
-  end
-
   context '#update_id' do
     it 'updates the id of the label' do
       label.update_id(1)

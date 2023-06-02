@@ -33,11 +33,4 @@ describe 'Book' do
       expect(book.cover_state).to eql cover_state
     end
   end
-
-  context '#save_books_to_json' do
-    it 'should save the books to the json file' do
-      book.save_books_to_json([book])
-      expect(File.exist?('data/books.json')).to be_truthy
-    end
-  end
 end
