@@ -15,7 +15,7 @@ class LabelLogic
     create_book_label(input_label, input_color)
   end
 
-  def create_book_label(title, color)
+  def create_book_label(title, color = 'unknown')
     if @all_local_labels.empty?
       create_label_obj(title, color)
     else

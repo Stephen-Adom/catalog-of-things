@@ -39,7 +39,7 @@ class Item
   end
 
   def label=(label)
-    @label = author
+    @label = label
     label.items << self unless label.items.include?(self)
   end
 end
