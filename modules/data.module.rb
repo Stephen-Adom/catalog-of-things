@@ -16,7 +16,7 @@ module LoadData
     File.open('./data/label.json', 'r') do |file|
       label_data = JSON.parse(file.read)['data']
       label_data.map do |data|
-        label_obj = Label.new(data['title'])
+        label_obj = Label.new(data['title'], data['color'])
 
         label_obj.update_id(data['id'])
 

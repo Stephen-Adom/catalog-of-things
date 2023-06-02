@@ -1,8 +1,8 @@
 require 'date'
 
 class Item
-  attr_reader :id, :archived, :genre
-  attr_accessor :author, :label, :publish_date
+  attr_reader :id, :archived, :genre, :author, :label
+  attr_accessor :publish_date
 
   def initialize(genre, author, label, publish_date)
     @id = generate_id
@@ -33,13 +33,13 @@ class Item
     genre.items << self unless genre.items.include?(self)
   end
 
-  def music=(music)
-    @music = music
-    music.items << self unless music.items.include?(self)
+  def author=(author)
+    @author = author
+    author.items << self unless author.items.include?(self)
   end
 
-  def book=(book)
-    @book = book
-    book.items << self unless book.items.include?(self)
+  def label=(label)
+    @label = author
+    label.items << self unless label.items.include?(self)
   end
 end
