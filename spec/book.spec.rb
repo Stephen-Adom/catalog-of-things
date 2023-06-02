@@ -1,67 +1,16 @@
 require_relative '../classes/book'
 require_relative '../classes/label'
+require_relative '../classes/genre'
+require_relative '../classes/author'
 require 'date'
 require 'json'
-
-class Genre
-  attr_reader :id, :items
-  attr_accessor :name
-
-  def initialize(name)
-    @id = generate_id
-    @name = name
-    @items = []
-  end
-
-  def add_item(item)
-    @items << item unless @items.include?(item)
-    item.genre = self
-  end
-
-  def update_id(id)
-    @id = id
-  end
-
-  private
-
-  def generate_id
-    (rand * 1000).floor
-  end
-end
-
-class Author
-  attr_reader :id, :items
-  attr_accessor :first_name, :last_name
-
-  def initialize(first_name, last_name)
-    @id = generate_id
-    @first_name = first_name
-    @last_name = last_name
-    @items = []
-  end
-
-  def add_item(item)
-    @items << item unless @items.include?(item)
-    item.author = self
-  end
-
-  def update_id(id)
-    @id = id
-  end
-
-  private
-
-  def generate_id
-    (rand * 1000).floor
-  end
-end
 
 describe 'Book' do
   let(:genre) { Genre.new('Fiction') }
   let(:author) { Author.new('J.K.', 'Rowling') }
   let(:label) { Label.new('Harry Potter') }
   let(:book) do
-    Book.new(genre, author, label, Date.new(1997, 11, 11),
+    Book.new(genre, author, label, '1997-11-11',
              'Bloomsbury')
   end
 
