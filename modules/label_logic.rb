@@ -1,5 +1,4 @@
 require_relative '../app'
-require 'pry'
 
 class LabelLogic
   def initialize
