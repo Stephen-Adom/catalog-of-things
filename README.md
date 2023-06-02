@@ -24,7 +24,7 @@
 
 # 📖 [Catalog-of-things] <a name="about-project"></a>
 
-A ruby-based console application to help you to keep a record of different types of things you own: books, music albums, movies, and games.
+A ruby-based console application to help you to keep a record of different types of things you own: books, music albums, movies, and games. You can find more details about the app here ![catalog-of-thing app](https://drive.google.com/file/d/17qkTbC1XevqYb4AAUzzwhG8A9VvTx_7b/view?usp=sharing)
 
 ## 🛠 Built With <a name="built-with"></a>
 
