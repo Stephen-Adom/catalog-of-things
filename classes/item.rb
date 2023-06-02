@@ -21,7 +21,7 @@ class Item
     today = Date.today
     ten_years_ago = Date.new(today.year - 10, today.month, today.day)
 
-    Date.parse(@publish_date) < ten_years_ago
+    Date.parse(@publish_date.to_s) < ten_years_ago
   end
 
   def move_to_archive
