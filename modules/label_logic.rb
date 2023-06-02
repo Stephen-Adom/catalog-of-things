@@ -7,7 +7,7 @@ class LabelLogic
   end
 
   def add_label
-    print 'Enter title (e.g Gift, New): '
+    print 'Enter label title (e.g Gift, New): '
     input_label = gets.chomp
 
     print 'Enter label color (e.g red, blue): '
