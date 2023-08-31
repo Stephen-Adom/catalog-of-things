@@ -83,7 +83,7 @@ On Linux:
 
 On Windows
 
-Go to [Windows Subsystem for Linux](https://learn.microsoft.com/en-us/windows/wsl/about) to set up wsl for ubuntu
+Go to [Windows Subsystem for Linux](https://learn.microsoft.com/en-us/windows/wsl/about) to set up wsl for Ubuntu
 
 ### Setup
 
@@ -100,7 +100,7 @@ This project does not require installation.
 
 ### Usage
 
-**To run the project follow the following instruction:-**
+**To run the project follow the following instructions:-**
 
 - Clone this [catalog-of-things](repo:https://github.com/Stephen-Adom/catalog-of-things.git) in your local machine with correct branch.
 - Run **ruby main.rb**
